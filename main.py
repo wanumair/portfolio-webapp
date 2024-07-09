@@ -1,7 +1,7 @@
 import streamlit as st
 import  pandas
 
-st.set_page_config(layout="wide")
+st.set_page_config()
 
 col1, col2 = st.columns(2)
 
@@ -21,13 +21,20 @@ Below u can find my projects. I mainly create these projects from tutorials that
 """
 st.write(content2)
 
-col3, col4 = st.columns(2)
+col3, empty_col, col4 = st.columns([1.5, 0.5, 1.5])
 
+#to seperate the data in csv using semicolon
 df = pandas.read_csv("data.csv", sep=";")
 with col3:
     for index, row in df[:10].iterrows():
         st.header(row["title"])
+        st.write(row["description"])
+        st.image("images/" + row['image'])
+        st.write(f"[Source Code]({row['url']})")
 
 with col4:
     for index, row in df[10:].iterrows():
         st.header(row["title"])
+        st.write(row["description"])
+        st.image("images/" + row['image'])
+        st.write(f"[Source Code]({row['url']})")
